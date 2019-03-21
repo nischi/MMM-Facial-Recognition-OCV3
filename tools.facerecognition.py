@@ -23,7 +23,7 @@ model.read("training.xml")
 print('Training data loaded!')
 
 
-def clean_shutdown(signum, frame):
+def clean_shutdown():
     """Release camera and close windows
     """
     camera.stop()
@@ -61,9 +61,9 @@ while True:
             x_face = x
             y_face = y
             crop = face.crop(image, x, y, w, h,int(ToolsConfig.getFaceFactor() * w))
-			
+
 			# confidence the lower the stronger the match
-			
+
             label, confidence = model.predict(crop)
 
             match = "None"

@@ -24,12 +24,12 @@ class ToolsConfig (CommonConfig):
     TRAINING_FILE = 'training.xml'
     TRAINING_DIR = './training_data/'
     POSITIVE_THRESHOLD=80
-    
+
     # The name of the person to be captured
-    captureName = ''
+    captureName = 'thierry'
 
 
-    USERS = ["User1", "User2", "User3", "User4", "User5", "User6", "User7", "User8", "User9", "User10"]
+    USERS = ['christina', 'leonas', 'thierry', 'larina', 'ilana']
 
     if ('FACE_USERS' in os.environ):
         u = os.environ['FACE_USERS']
@@ -55,10 +55,10 @@ class ToolsConfig (CommonConfig):
 
     def getCapturePath(self):
         return ToolsConfig.TRAINING_DIR + self.captureName
-        
+
     def getCapturedFiles(self, pattern):
         return os.path.join(self.getCapturePath(), pattern)
-    
+
     def getNewCaptureFile(self):
         self.createCaptureDirIfNotExisting()
         files = sorted(glob.glob(self.getCapturedFiles('[0-9][0-9][0-9].pgm')))
@@ -69,7 +69,7 @@ class ToolsConfig (CommonConfig):
         return self.getCapturedFiles('%03d.pgm' % count), count
 
 
-    
+
     @classmethod
     def walkFiles(cls, directory, match='*'):
         """Generator function to iterate through all files in a directory
@@ -79,7 +79,7 @@ class ToolsConfig (CommonConfig):
             for filename in fnmatch.filter(files, match):
                 yield os.path.join(root, filename)
 
-        
+
     @classmethod
     def getCamera(cls):
         try:
