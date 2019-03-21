@@ -16,14 +16,14 @@ import re
 import cv2
 sys.path.append((os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))+ '/common/'))
 
-from config import ToolsConfig
+from .config import ToolsConfig
 from face import FaceDetection
 
 class ToolsCapture:
     def __init__(self, capName=None):
         self.face = ToolsConfig.getFaceDetection()
         self.captureName = capName
-                     
+
 
 
     def capture(self):
@@ -63,7 +63,7 @@ class ToolsCapture:
     def convert(self, rawDir):
         toolsConfig = ToolsConfig(self.captureName)
         filename, count = toolsConfig.getNewCaptureFile()
-        
+
         for filename in ToolsConfig.walkFiles(rawDir, '*'):
             if not re.match('.+\.(jpg|jpeg)$', filename, re.IGNORECASE):
                 print("file {0} does not have the correct file extention."

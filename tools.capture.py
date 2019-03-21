@@ -9,7 +9,7 @@ Based on work by Paul-Vincent Roll (Copyright 2016) (MIT License)
 from lib.tools.capture import ToolsCapture
 from lib.tools.config import ToolsConfig
 
-# to install builtins run `pip install future` 
+# to install builtins run `pip install future`
 from builtins import input
 
 
