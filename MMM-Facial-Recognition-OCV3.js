@@ -3,7 +3,7 @@
 /* Magic Mirror
  * Module: MMM-Facial-Recognition-OC3
  *
- * By Mathieu Goulène - Based on work made by Paul-Vincent Roll 
+ * By Mathieu Goulène - Based on work made by Paul-Vincent Roll
  * MIT Licensed.
  */
 
@@ -54,12 +54,12 @@ Module.register('MMM-Facial-Recognition-OCV3',{
 		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
 			module.hide(1000, function() {
 				Log.log(module.name + ' is hidden.');
-			}, {lockString: self.identifier});
-		});
 
-		MM.getModules().withClass(this.current_user).enumerate(function(module) {
-			module.show(1000, function() {
-				Log.log(module.name + ' is shown.');
+				MM.getModules().withClass(self.current_user).enumerate(function(module) {
+					module.show(1000, function() {
+						Log.log(module.name + ' is shown.');
+					}, {lockString: self.identifier});
+				});
 			}, {lockString: self.identifier});
 		});
 
@@ -72,12 +72,12 @@ Module.register('MMM-Facial-Recognition-OCV3',{
 		MM.getModules().withClass(this.current_user).enumerate(function(module) {
 			module.hide(1000, function() {
 				Log.log(module.name + ' is hidden.');
-			}, {lockString: self.identifier});
-		});
 
-		MM.getModules().withClass(this.config.defaultClass).exceptWithClass(this.config.everyoneClass).enumerate(function(module) {
-			module.show(1000, function() {
-				Log.log(module.name + ' is shown.');
+				MM.getModules().withClass(self.config.defaultClass).exceptWithClass(self.config.everyoneClass).enumerate(function(module) {
+					module.show(1000, function() {
+						Log.log(module.name + ' is shown.');
+					}, {lockString: self.identifier});
+				});
 			}, {lockString: self.identifier});
 		});
 
