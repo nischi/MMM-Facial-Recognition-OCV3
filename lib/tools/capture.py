@@ -75,7 +75,7 @@ class ToolsCapture:
             image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
             # TODO: check for multiple faces and warn
             # Get coordinates of single face in captured image.
-            result = self.face.detect_single(image)
+            result = self.face.detect_faces(image)
             if result is None:
                 if (height + width > 800):
                     # it's a big image resize it and try again
@@ -84,27 +84,29 @@ class ToolsCapture:
                           .format(height, width,
                                   int(mult*height), int(mult*width)))
                     image2 = cv2.resize(image, None, fx=mult, fy=mult)
-                    result = self.face.detect_single(image2)
+                    result = self.face.detect_faces(image2)
                     if result is None:
                         mult = 0.25
                         print('Resizing from ({0},{1}) -> ({2},{3})'
                               .format(height, width,
                                       int(mult*height), int(mult*width)))
                         image2 = cv2.resize(image, None, fx=mult, fy=mult)
-                        result = self.face.detect_single(image2)
+                        result = self.face.detect_faces(image2)
                     if result is not None:
                         print('It worked, found a face in resized image!')
                         image = image2
                 if result is None:
                     print('No face found')
                     continue
-            x, y, w, h = result
-            # Crop image as close as possible to desired face aspect ratio.
-            # Might be smaller if face is near edge of image.
-            crop = self.face.crop(image, x, y, w, h,int(ToolsConfig.getFaceFactor() * w))
-            # Save image to file.
-            toFilename = os.path.join(ToolsConfig.TRAINING_DIR,
-                                    self.captureName, '%03d.pgm' % count)
-            cv2.imwrite(toFilename, crop)
-            print('Found face and wrote training image', toFilename)
-            count += 1
+
+            for face in result:
+                x, y, w, h = face
+                # Crop image as close as possible to desired face aspect ratio.
+                # Might be smaller if face is near edge of image.
+                crop = self.face.crop(image, x, y, w, h,int(ToolsConfig.getFaceFactor() * w))
+                # Save image to file.
+                toFilename = os.path.join(ToolsConfig.TRAINING_DIR,
+                                        self.captureName, '%03d.pgm' % count)
+                cv2.imwrite(toFilename, crop)
+                print('Found face and wrote training image', toFilename)
+                count += 1
