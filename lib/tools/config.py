@@ -29,7 +29,7 @@ class ToolsConfig (CommonConfig):
     captureName = 'thierry'
 
 
-    USERS = ['elisabeth', 'christina', 'leonas', 'thierry', 'sepp', 'bruno', 'larina', 'ilana', 'stefan', 'josef']
+    USERS = ['leonas', 'christina', 'larina', 'ilana', 'thierry']
 
     if ('FACE_USERS' in os.environ):
         u = os.environ['FACE_USERS']
