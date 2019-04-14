@@ -133,6 +133,7 @@ while True:
             break
     else:
         print('No windowing system, writing face.jpg image')
+        cv2.imwrite('face.jpg', frame)
         camera.stop()
         break
 
